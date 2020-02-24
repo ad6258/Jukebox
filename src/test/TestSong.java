@@ -15,11 +15,11 @@ public class TestSong {
     public void testSongAccessors() {
         Song song1 = new Song("Lil Nas X", "Old Town Road");
         assertEquals("Lil Nas X", song1.getArtist());
-        assertEquals("Old Town Road", song1.getSong());
+        assertEquals("Old Town Road", song1.getName());
 
         Song song2 = new Song("Tool", "Pneuma");
         assertEquals("Tool", song2.getArtist());
-        assertEquals("Pneuma", song2.getSong());
+        assertEquals("Pneuma", song2.getName());
     }
 
     @Test
