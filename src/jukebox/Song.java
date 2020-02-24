@@ -34,6 +34,6 @@ public class Song implements Comparable<Song> {
     }
     @Override
     public String toString(){
-        return "Song{name: " + this.name + ", artist: " + this.artist + "}";
+        return name + " by " + artist;
     }
 }
