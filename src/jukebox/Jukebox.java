@@ -13,8 +13,6 @@ public class Jukebox {
 
     public static int SIMULATION_RUNS = 50000;
 
-    private ArrayList<Integer> songsB4DuplicateArray;
-
     private HashMap<String, SongList> jukebox;
 
     private Song mostPlayedSong;
@@ -32,7 +30,6 @@ public class Jukebox {
 
     public Jukebox(String filename) throws FileNotFoundException {
         jukebox = new HashMap<>();
-        songsB4DuplicateArray = new ArrayList<>();
         Scanner in = new Scanner(new File(filename));
         noOfSongs = 0;
         readData(in);
@@ -71,9 +68,9 @@ public class Jukebox {
                 ++songsB4duplicate;
                 if (!jukebox.containsKey(song.getArtist())) {
                     song.setSimulationNum(i-1);
-                    ArrayList<Song> songArrayList = new ArrayList<>();
-                    songArrayList.add(song);
-                    SongList newSongList = new SongList(songArrayList);
+                    HashSet<Song> songSet = new HashSet<>();
+                    songSet.add(song);
+                    SongList newSongList = new SongList(songSet);
                     jukebox.put(song.getArtist(), newSongList);
                 }
                 else {
@@ -85,11 +82,9 @@ public class Jukebox {
                     }
                     else{
                         int simNum = song.getSimulationNum();
-                        int index = songList.indexOf(song);
-                        Song newSong = songList.get(index);
-                        newSong.setSimulationNum(i-1);
+                        song.setSimulationNum(i-1);
                         songList.remove(song);
-                        songList.add(newSong);
+                        songList.add(song);
                         if(simNum == i-1){
                             song.decrNumberOfPlays();
                             --songsB4duplicate;
@@ -116,11 +111,10 @@ public class Jukebox {
         out.println("Average number of songs played per simulation to get duplicate: " + avg);
         out.println("Most played song: " + mostPlayedSong);
         out.println("All songs alphabetically by " + mostPlayedSong.getArtist() + " :");
-        jukebox.get(mostPlayedSong.getArtist()).sort();
+        SongList songArray = jukebox.get(mostPlayedSong.getArtist());
+        songArray.sort();
         SongList songList = jukebox.get(mostPlayedSong.getArtist());
-        for(int i = 0; i < songList.getLength(); i++){
-            out.println("\t\t" + songList.get(i).getName() + " with " + songList.get(i).getNumberOfPlays() + " plays");
-        }
+        songList.print();
     }
 
     public static void main(String[] args) {
