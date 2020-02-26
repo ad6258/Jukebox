@@ -192,8 +192,6 @@ public class Jukebox {
         out.println("Average number of songs played per simulation to get duplicate: " + avg);
         out.println("Most played song: " + mostPlayedSong);
         out.println("All songs alphabetically by " + mostPlayedSong.getArtist() + " :");
-        SongList songArray = jukebox.get(mostPlayedSong.getArtist());
-        songArray.sort();
         SongList songList = jukebox.get(mostPlayedSong.getArtist());
         songList.print();
 

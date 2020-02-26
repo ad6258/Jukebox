@@ -1,8 +1,6 @@
 package jukebox;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * This class represents a collection of songs by a single artist
@@ -13,18 +11,14 @@ public class SongList {
     /**
      * HashSet of songs
      */
-    private HashSet<Song> songSet;
-    /**
-     * ArrayList of songs
-     */
-    private ArrayList<Song> songArray;
+    private HashSet<Song> songHashSet;
 
     /**
-     * construstor to set songSet
-     * @param songSet HashSet of songs
+     * constructor to set songSet
+     * @param songHashSet HashSet of songs
      */
-    public SongList(HashSet<Song> songSet){
-         this.songSet = songSet;
+    public SongList(HashSet<Song> songHashSet){
+         this.songHashSet = songHashSet;
     }
 
     /**
@@ -32,7 +26,7 @@ public class SongList {
      * @param song song to be removed
      */
     public void remove(Song song){
-        songSet.remove(song);
+        songHashSet.remove(song);
     }
 
     /**
@@ -42,7 +36,7 @@ public class SongList {
      *         false if it is not
      */
     public boolean contains(Song song){
-        return songSet.contains(song);
+        return songHashSet.contains(song);
     }
 
     /**
@@ -50,25 +44,18 @@ public class SongList {
      * @param song song to added
      */
     public void add(Song song){
-        songSet.add(song);
+        songHashSet.add(song);
     }
 
     /**
-     * sorts the songSet by converting it to an array
-     */
-    public void sort(){
-        songArray = new ArrayList<>(songSet);
-        Collections.sort(songArray);
-
-    }
-
-    /**
-     * prints every song with number of times it has been played
+     * prints every song with number of times it has been played by converting HashSet to TreeSet
      */
     public void print(){
-        for(Song o : songArray){
+        TreeSet<Song> songTreeSet = new TreeSet<>(songHashSet);
+        for(Song o : songTreeSet){
             System.out.println("\t\t" + "\"" + o.getName() + "\"" + " with " + o.getNumberOfPlays() + " plays");
         }
+
     }
 }
 
